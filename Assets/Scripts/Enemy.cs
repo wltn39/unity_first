@@ -38,7 +38,7 @@ public class Enemy : MonoBehaviour
             if (hp <= 0)
             {
                 Destroy(gameObject);
-                Instantiate(coin, transform.position, Quaternion.identity);
+
             }
             Destroy(other.gameObject);
         }
