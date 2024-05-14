@@ -45,21 +45,26 @@ public class Player : MonoBehaviour
 
         void Shoot()
         {
-            // 10 - 0 > 0.2
-            // lastShotTime = 10; 
-            // 10.01 - 10 > 0.2 --> false 
-            // 10.02 - 10 > 0.2 --> false 
-            // 10.03 - 10 > 0.2 --> true 
-
-
-
             if (Time.time - lastShotTime > shootInterval)
             {
                 Instantiate(weapon, shootTransform.position, Quaternion.identity);
                 lastShotTime = Time.time;
             }
         }
-
-
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            Debug.Log("Game Over");
+            Destroy(gameObject);
+        }
+        else if (other.gameObject.tag == "Coin")
+        {
+            GameManager.instance.IncreaseCoin();
+            Destroy(other.gameObject);
+        }
+    }
+
 }
